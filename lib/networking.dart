@@ -4,37 +4,36 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-Future<Album> fetchAlbum() async {
+Future<User> fetchUser() async {
   final response = await http
-      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+      .get(Uri.parse('https://jsonplaceholder.typicode.com/users/1'));
 
   if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return Album.fromJson(jsonDecode(response.body));
+
+    return User.fromJson(jsonDecode(response.body));
   } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
+
     throw Exception('Failed to load album');
   }
 }
 
-class Album {
-  final int userId;
+class User {
   final int id;
-  final String title;
+  final String name;
+  // final String userName;
+  final String email;
 
-  const Album({
-    required this.userId,
+  User({
     required this.id,
-    required this.title,
+    required this.name,
+    required this.email,
   });
 
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      userId: json['userId'],
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
       id: json['id'],
-      title: json['title'],
+      name: json['name'],
+      email: json['email'],
     );
   }
 }
@@ -49,12 +48,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late Future<Album> futureAlbum;
+  late Future<User> futureUser;
 
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchAlbum();
+    futureUser = fetchUser();
   }
 
   @override
@@ -69,11 +68,11 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Fetch Data Example'),
         ),
         body: Center(
-          child: FutureBuilder<Album>(
-            future: futureAlbum,
+          child: FutureBuilder<User>(
+            future: futureUser,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data!.title);
+                return Text(snapshot.data!.name);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }

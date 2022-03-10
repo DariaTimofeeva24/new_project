@@ -25,6 +25,7 @@ class _ThemesDemoScreenState extends State<ThemesDemoScreen> {
   double _currentSliderValue = 20;
   bool _isDarkTheme = false;
 
+
   Widget _navigationDraw() => Drawer(
     child: ListView(
         padding: EdgeInsets.zero,
@@ -76,7 +77,7 @@ class _ThemesDemoScreenState extends State<ThemesDemoScreen> {
   );
 
   PreferredSizeWidget _appBar() => AppBar(
-title: Text('Демо',),
+title: Text('Final project',),
 actions: [
   IconButton(
       icon: const Icon(Icons.add_alert),
@@ -120,26 +121,7 @@ actions: [
     ),
     ElevatedButton(onPressed: () {} , child: Text('Войти')),
     Text(Strings.LongBodyText),
-    Slider(
-    value: _currentSliderValue,
-    max: 100,
-    divisions: 5,
-    label: _currentSliderValue.round().toString(),
-    onChanged: (double value) {
-    setState(() {
-    _currentSliderValue = value;
-    });
-    },
-  ),
-         SwitchListTile(
-           title: Text('Темная тема'),
-           value: _isDarkTheme,
-  onChanged: (val) {
-    setState(() {
-      _isDarkTheme = !_isDarkTheme;
-      if (_isDarkTheme) {}
-    });
-  }),
+
   ],
   ),
   ),

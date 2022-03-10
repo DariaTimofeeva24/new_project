@@ -9,7 +9,6 @@ import 'navigation.dart';
 import 'networking.dart';
 
 
-
 void main() {
-  runApp(const MyApp());
+  runApp(const ThemesDemoApp());
 }
